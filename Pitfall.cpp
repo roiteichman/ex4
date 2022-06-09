@@ -4,7 +4,7 @@
 #include "Pitfall.h"
 
 Pitfall::Pitfall():
-        Card(CardType::Battle, m_stats, "Pitfall")
+        Card(CardType::buff, m_stats, "Pitfall")
 {}
 
 void Pitfall::print(ostream &os) const
