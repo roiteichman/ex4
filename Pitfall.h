@@ -7,8 +7,10 @@
 #define MTMCHKIN_H_PITFALL_H
 
 class Pitfall : public Card {
+public:
     Pitfall();
     ~Pitfall() = default;
+
 }
 
 #endif //MTMCHKIN_H_PITFALL_H

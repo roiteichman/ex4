@@ -63,3 +63,5 @@ ostream &operator<<(ostream &os, const Card &card) {
     card.print(os);
     return os;
 }
+
+void Card::print(ostream &os) const {}
