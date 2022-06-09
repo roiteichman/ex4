@@ -18,6 +18,6 @@ protected:
 
 
 private:
-    CardStats m_stats = CardStats(P_FORCE, P_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, P_LOOT);
+    CardStats m_stats = CardStats(IRRELEVANT, P_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT);
 };
 #endif //MTMCHKIN_H_PITFALL_H
