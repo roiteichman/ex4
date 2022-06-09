@@ -30,16 +30,15 @@ const char SPACE = ' ';
 
 Card& strToCard(string str);
 
-Mtmchkin::Mtmchkin(const std::string fileName)
-{
+Mtmchkin::Mtmchkin(const std::string fileName) {
     Queue<Card> m_queue;
 
     ifstream file(fileName);
-    if (!file){
+    if (!file) {
         /// throw Exception
     }
     char line[MAX_LENGTH];
-    while(!file.getline(line, sizeof(line))){
+    while (!file.getline(line, sizeof(line))) {
         m_queue.pushBack(strToCard(line));
     }
 
