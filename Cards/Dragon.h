@@ -15,7 +15,7 @@ const int IRRELEVANT=0;
 class Dragon : public Card{
 public:
     Dragon();
-    ~Dragon()=default;
+    ~Dragon() override =default;
 
 private:
     CardStats m_stats = CardStats(FORCE, HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, LOOT);
