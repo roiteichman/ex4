@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "Players/Player.h"
+#include "Player.h"
 #include "Cards/Card.h"
 #include "Mtmchkin.h"
 #include "Cards/Vampire.h"
@@ -15,9 +15,9 @@
 #include "Cards/Merchant.h"
 #include "Cards/Pitfall.h"
 #include "Cards/Treasure.h"
-#include "Players/Rogue.h"
-#include "Players/Wizard.h"
-#include "Players/Fighter.h"
+#include "Rogue.h"
+#include "Wizard.h"
+#include "Fighter.h"
 #include "Exception.h"
 #include <algorithm>
 #include <sstream>
