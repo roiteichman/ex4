@@ -88,7 +88,7 @@ bool GeneralGameSimulationTest(const string &tempDeckFilename, string input, str
     std::ofstream outfile(tempDeckFilename+"out.txt");
     std::streambuf *coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(outfile.rdbuf());
-    Mtmchkin game(tempDeckFilename+".txt");
+    MtmchkinOld game(tempDeckFilename + ".txt");
     while(!game.isGameOver() && game.getNumberOfRounds() < 100){
         game.playRound();
         game.printLeaderBoard();
@@ -155,7 +155,7 @@ bool testCard()
 }
 
 /* ---------------------------------------------------------------------------------------------- */
-// --------------------------------       Tests for Mtmchkin class          ------------------------------
+// --------------------------------       Tests for MtmchkinOld class          ------------------------------
 
 bool gameRunTest()
 {
@@ -165,7 +165,7 @@ bool gameRunTest()
         throw std::exception();
     }
     std::cin.rdbuf(in.rdbuf());
-    Mtmchkin game("gametest.txt");
+    MtmchkinOld game("gametest.txt");
     while(!game.isGameOver()){
         game.playRound();
     }
@@ -261,7 +261,7 @@ bool badSizeTest()
     string expectedOutputFilename("notneeded.txt");
 	bool flag= false;
     try{
-        Mtmchkin("inputs/empty.txt");
+        MtmchkinOld("inputs/empty.txt");
     }
     catch(const DeckFileInvalidSize& e){
         flag = true;
@@ -277,7 +277,7 @@ bool noFileTest()
     string deck("This_is_not_the_file_your_looking_for");
     bool flag = false;
     try{
-        Mtmchkin("noFile.txt");
+        MtmchkinOld("noFile.txt");
     }
     catch(const DeckFileNotFound& e){
         flag=true;
@@ -293,7 +293,7 @@ bool badFormatTest()
     string expectedOutputFilename("notneeded.txt");
     bool flag = false;
     try {
-        Mtmchkin("inputs/badFormat_test.txt");
+        MtmchkinOld("inputs/badFormat_test.txt");
     }
     catch(const DeckFileFormatError& e){
         if(strcmp(e.what(),"Deck File Error: File format error in line 2")==0) {
@@ -311,7 +311,7 @@ bool badFormatStartTest()
     string expectedOutputFilename("notneeded.txt");
     bool flag = false;
     try {
-        Mtmchkin("inputs/badFormat_test_start_of_file.txt");
+        MtmchkinOld("inputs/badFormat_test_start_of_file.txt");
     }
     catch(const DeckFileFormatError& e){
         if(strcmp(e.what(),"Deck File Error: File format error in line 1")==0)

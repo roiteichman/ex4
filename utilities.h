@@ -138,7 +138,7 @@ void printTreasureMessage();
 void printMerchantSummary(std::ostream &os, const std::string &playerName, int type, int cost);
 
 /* ---------------------------------------------------------------------------------------------- */
-// ----------------       Print functions for Mtmchkin class          -----------------------
+// ----------------       Print functions for MtmchkinOld class          -----------------------
 
 /*
  * Prints info indicating the start of the game:

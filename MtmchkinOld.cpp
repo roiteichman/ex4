@@ -33,13 +33,13 @@ bool MtmchkinOld::isOver() const
 }
 
 
-GameStatus Mtmchkin::getGameStatus() const
+GameStatus MtmchkinOld::getGameStatus() const
 {
     return m_gameStatus;
 }
 
 
-void Mtmchkin::updateStatus(GameStatus gameStatus)
+void MtmchkinOld::updateStatus(GameStatus gameStatus)
 {
     if (m_player.isKnockedOut()){
         m_gameStatus = GameStatus::Loss;
@@ -49,7 +49,7 @@ void Mtmchkin::updateStatus(GameStatus gameStatus)
     }
 }
 
-Mtmchkin::~Mtmchkin()
+MtmchkinOld::~MtmchkinOld()
 {
     delete[] m_cardsArray;
 }
