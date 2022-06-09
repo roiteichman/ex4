@@ -14,6 +14,8 @@
 #include "Fairy.h"
 #include <fstream>
 using std::ifstream;
+using std::cin;
+using std::cout;
 const int MAX_LENGTH = 16;
 const int NUM_OF_CARDS = 6;
 const int GOBLIN = 0;
@@ -24,6 +26,7 @@ const int TREASURE = 4;
 const int PITFALL = 5;
 const int BARFIGHT = 6;
 const int FAIRY = 7;
+const char SPACE = ' ';
 
 Card& strToCard(string str);
 
@@ -40,6 +43,38 @@ Mtmchkin::Mtmchkin(const std::string fileName)
         m_queue.pushBack(strToCard(line));
     }
 
+    int numOfPlayers;
+    printStartGameMessage();
+    do {
+        printEnterTeamSizeMessage();
+        cin >> numOfPlayers;
+        if (numOfPlayers < 2 || numOfPlayers > 6) {
+            printInvalidTeamSize();
+        }
+    } while (numOfPlayers < 2 || numOfPlayers > 6);
+
+    char* nameAndRoll;
+
+    printInsertPlayerMessage();
+
+
+
+    string name;
+    string roll;
+    int j=0, k=0;
+    for (int i = 0; i < numOfPlayers; ++i) {
+        cin >> nameAndRoll;
+        while (nameAndRoll[k]) {
+            k++;
+            if (nameAndRoll[k] == SPACE) {
+                j = k;
+            }
+        }
+        name.copy(nameAndRoll, j, 0);
+        roll.copy(nameAndRoll, k-j-1 ,j+1);
+        /// TO DO: checking legalization of the name and roll;
+        //if(!roll)
+          //  i--;
 }
 
 Card& strToCard(string str) {
