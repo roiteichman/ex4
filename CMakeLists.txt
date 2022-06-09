@@ -12,5 +12,7 @@ add_executable(ex4
         utilities.h
         card.cpp
         card.h
-        player.cpp
-        player.h)
+        Wizard.h
+        Rogue.h
+        Player.cpp
+        Player.h)
