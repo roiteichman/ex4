@@ -6,7 +6,7 @@
 #ifndef CARD_CPP_TREASURE_H
 #define CARD_CPP_TREASURE_H
 
-const int V_LOOT=10;
+const int T_LOOT=10;
 
 class Treasure : public Card{
 public:
@@ -18,6 +18,6 @@ protected:
 
 
 private:
-    CardStats m_stats = CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, V_LOOT);
+    CardStats m_stats = CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, T_LOOT);
 };
 #endif //CARD_CPP_TREASURE_H
