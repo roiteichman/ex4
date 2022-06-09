@@ -1,7 +1,14 @@
 //
-// Created by teich on 09/06/2022.
+// Created by shlom on 09/06/2022.
 //
-
 #include "Pitfall.h"
 
-Pitfall::Pitfall{};
+Pitfall::Pitfall():
+        Card(CardType::Battle, m_stats, "Pitfall")
+{}
+
+void Pitfall::print(ostream &os) const
+{
+    printCardDetails(os, m_name);
+    printEndOfCardDetails(os);
+}
