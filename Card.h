@@ -88,7 +88,7 @@ public:
      * @return
      *      void
     */
-    void printInfo() const;
+    virtual void printInfo() const;
 
 
     /*
@@ -106,7 +106,7 @@ public:
 
 protected:
     friend ostream & operator<<(ostream& os, const Card& card);
-    virtual void print (ostream& os) const = 0;
+    virtual void print (ostream& os) const;
 
 protected:
     string m_name;

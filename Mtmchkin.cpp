@@ -41,3 +41,45 @@ Mtmchkin::Mtmchkin(const std::string fileName)
     }
 
 }
+
+Card& strToCard(string str) {
+    string cards[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
+    for (int i = 0; i <= NUM_OF_CARDS; ++i) {
+        if (str.compare(cards[i])) {
+            switch (i) {
+                case (GOBLIN): {
+                    Goblin *goblin = new Goblin();
+                    return *goblin;
+                }
+                case (VAMPIRE): {
+                    Vampire *vampire = new Vampire();
+                    return *vampire;
+                }
+                case (DRAGON): {
+                    Dragon *dragon = new Dragon();
+                    return *dragon;
+                }
+                case (MERCHANT): {
+                    Merchant *merchant = new Merchant();
+                    return *merchant;
+                }
+                case (TREASURE): {
+                    Treasure *treasure = new Treasure();
+                    return *treasure;
+                }
+                case (PITFALL): {
+                    Pitfall *pitfall = new Pitfall();
+                    return *pitfall;
+                }
+                case (BARFIGHT): {
+                    Barfight *barfight = new Barfight();
+                    return *barfight;
+                }
+                case (FAIRY): {
+                    Fairy *fairy = new Fairy();
+                    return *fairy;
+                }
+            }
+        }
+    }
+}
