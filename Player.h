@@ -114,7 +114,7 @@ public:
      * @return
      *      void
     */
-    void addCoins(int n);
+    virtual void addCoins(int n);
 
 
     /*

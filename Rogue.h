@@ -1,0 +1,16 @@
+//
+// Created by shlom on 09/06/2022.
+//
+
+#include "Player.h"
+
+#ifndef PLAYER_CPP_ROGUE_H
+#define PLAYER_CPP_ROGUE_H
+
+class Rogue : public Player{
+public:
+    Rogue(const char* name, int hp = MAX_HP, int force = STARTING_FORCE);
+    void addCoins(int n) override;
+};
+
+#endif //PLAYER_CPP_ROGUE_H
