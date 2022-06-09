@@ -2,9 +2,9 @@
 // Created by teich on 04/05/2022.
 //
 
-#include "Mtmchkin.h"
+#include "MtmchkinOld.h"
 
-Mtmchkin::Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCards):
+MtmchkinOld::MtmchkinOld(const char *playerName, const Card *cardsArray, int numOfCards):
     m_player(Player(playerName)),
     m_cardsArray(new Card[numOfCards]),
     m_numOfCards(numOfCards),
@@ -17,7 +17,7 @@ Mtmchkin::Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCard
     }
 }
 
-void Mtmchkin::playNextCard()
+void MtmchkinOld::playNextCard()
 {
     if(m_gameStatus==GameStatus::MidGame) {
         m_currentCard.printInfo();
@@ -27,7 +27,7 @@ void Mtmchkin::playNextCard()
         updateStatus(m_gameStatus);
     }
 }
-bool Mtmchkin::isOver() const
+bool MtmchkinOld::isOver() const
 {
     return (m_player.isKnockedOut() || m_player.getLevel()==MAX_LEVEL);
 }

@@ -1,3 +1,6 @@
+#include <string>
+
+
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
 

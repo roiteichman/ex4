@@ -15,7 +15,7 @@
 */
 enum class GameStatus{Win, Loss, MidGame};
 
-class Mtmchkin {
+class MtmchkinOld {
 public:
 
     /*
@@ -27,7 +27,7 @@ public:
      * @result
      *      An instance of Mtmchkin
     */
-    Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards);
+    MtmchkinOld(const char* playerName, const Card* cardsArray, int numOfCards);
 
 
 
@@ -72,7 +72,7 @@ public:
     /*
      * Here we are explicitly telling the compiler to use the default methods
     */
-    ~Mtmchkin();
+    ~MtmchkinOld();
 
 
 private:
