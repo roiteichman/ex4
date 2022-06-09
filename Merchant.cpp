@@ -5,7 +5,7 @@
 //
 // Created by shlom on 09/06/2022.
 //
-#include "Pitfall.h"
+#include "Merchant.h"
 
 Merchant::Merchant():
         Card(CardType::buff, m_stats, "Merchant")
