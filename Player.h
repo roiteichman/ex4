@@ -32,7 +32,7 @@ public:
      * Here we are explicitly telling the compiler to use the default methods
     */
     Player(const Player&) = default;
-    ~Player() = default;
+    virtual ~Player() = default;
     Player& operator=(const Player& other_player) = default;
 
 
@@ -83,7 +83,7 @@ public:
      * @return
      *      void
     */
-    void heal(int n);
+    virtual void heal(int n);
 
 
     /*

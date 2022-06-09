@@ -11,6 +11,7 @@ class Rogue : public Player{
 public:
     Rogue(const char* name, int hp = MAX_HP, int force = STARTING_FORCE);
     void addCoins(int n) override;
+    ~Rogue()=default;
 };
 
 #endif //PLAYER_CPP_ROGUE_H
