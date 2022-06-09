@@ -138,13 +138,16 @@ public:
     */
     int getAttackStrength() const;
 
+protected:
+    int m_coins;
+    int m_hp;
+    int m_maxHP;
+
 private:
     const char* m_name;
-    int m_maxHP;
-    int m_hp;
     int m_force;
     int m_level;
-    int m_coins;
+
 
 };
 
