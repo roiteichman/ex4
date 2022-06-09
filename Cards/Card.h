@@ -7,6 +7,10 @@
 #include <string>
 #include "Players/Player.h"
 
+using std::ostream;
+using std::string;
+
+
 
 /*
  * Numeric stats of a card.
@@ -99,7 +103,12 @@ public:
     virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
 
+protected:
+    friend ostream & operator<<(ostream& os, const Card& card);
+    virtual void print (ostream& os) const = 0;
 
+protected:
+    string m_name;
 private:
     CardType m_effect;
     CardStats m_stats;

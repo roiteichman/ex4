@@ -17,6 +17,9 @@ public:
     Dragon();
     ~Dragon() override =default;
 
+protected:
+    void print(ostream &os) const override;
+
 private:
     CardStats m_stats = CardStats(FORCE, HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, LOOT);
 };
