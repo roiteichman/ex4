@@ -5,9 +5,10 @@
 #include <iostream>
 
 
-Card::Card(CardType type, const CardStats &stats):
+Card::Card(CardType type, const CardStats &stats, std::string name):
     m_effect(type),
-    m_stats(stats)
+    m_stats(stats),
+    m_name(name)
 {}
 
 void Card::applyEncounter(Player &player) const

@@ -4,6 +4,7 @@
 #ifndef EX2_Card_H
 #define EX2_Card_H
 
+#include "utilities.h"
 #include <string>
 #include "Players/Player.h"
 
@@ -11,7 +12,7 @@ using std::ostream;
 using std::string;
 
 
-
+const int IRRELEVANT=0;
 /*
  * Numeric stats of a card.
  */
@@ -68,7 +69,7 @@ public:
      * @return
      *      A new instance of Card.
     */
-    Card(CardType type, const CardStats& stats);
+    Card(CardType type, const CardStats& stats, string m_name);
 
 
     /*
@@ -78,7 +79,7 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) const;
+    virtual void applyEncounter(Player& player) const;
 
 
     /*
