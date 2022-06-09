@@ -136,17 +136,17 @@ public:
      *      AttackStrength = level + force
      *
     */
-    int getAttackStrength() const;
+    virtual int getAttackStrength() const;
 
 protected:
     int m_coins;
     int m_hp;
     int m_maxHP;
+    int m_level;
+    int m_force;
 
 private:
     const char* m_name;
-    int m_force;
-    int m_level;
 
 
 };
