@@ -8,7 +8,7 @@
 #include "Merchant.h"
 
 Merchant::Merchant():
-        Card(CardType::buff, m_stats, "Merchant")
+        Card(CardType::Battle, m_stats, "Merchant")
 {}
 
 void Merchant::print(ostream &os) const
