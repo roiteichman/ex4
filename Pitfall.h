@@ -6,9 +6,7 @@
 #ifndef MTMCHKIN_H_PITFALL_H
 #define MTMCHKIN_H_PITFALL_H
 
-const int P_FORCE=10;
-const int P_HP_LOSS=10;
-const int P_LOOT=2;
+const int P_HP_LOSS=10; /// TO DO: decrease 10 HP for everyone who not the Rogue
 
 class Pitfall : public Card{
 public:
