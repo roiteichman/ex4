@@ -6,7 +6,7 @@
 
 #include "utilities.h"
 #include <string>
-#include "Players/Player.h"
+#include "Player.h"
 
 using std::ostream;
 using std::string;

@@ -9,7 +9,7 @@ add_executable(ex4
         test.cpp
         utilities.cpp
         utilities.h
-        Cards/Card.cpp
-        Cards/Card.h
-        Cards/Vampire.cpp
-        Cards/Vampire.h)
+        Card.cpp
+        Card.h
+        Vampire.cpp
+        Vampire.h)
