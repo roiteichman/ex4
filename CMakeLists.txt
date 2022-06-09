@@ -6,13 +6,10 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(ex4
-        Mtmchkin.h
         test.cpp
         utilities.cpp
         utilities.h
-        card.cpp
-        card.h
-        Players/Wizard.h
-        Players/Rogue.h
-        Players/Player.cpp
-        Players/Player.h)
+        Cards/Card.cpp
+        Cards/Card.h
+        Cards/Vampire.cpp
+        Cards/Vampire.h)
