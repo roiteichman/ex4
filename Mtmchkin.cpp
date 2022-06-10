@@ -41,6 +41,8 @@ const char SPACE = ' ';
 const string CARDS_STR[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
 const string PLAYERS_STR[3] = {"Rogue", "Wizard", "Fighter"};
 const int NOT_A_CARD = -1;
+const int MIN_PLAYERS = 2;
+const int MAX_PLAYERS = 6;
 
 int indexOfCard(string str);
 Card& intToCard(int i);
@@ -94,10 +96,10 @@ m_roundCount(0)
         if (isValid){
             m_numOfPlayers = std::stoi(str_numOfPlayers);
         }
-        if (m_numOfPlayers < 2 || m_numOfPlayers > 6) {
+        if (m_numOfPlayers < MIN_PLAYERS || m_numOfPlayers > MAX_PLAYERS) {
             printInvalidTeamSize();
         }
-    } while (m_numOfPlayers < 2 || m_numOfPlayers > 6 || !isValid);
+    } while (m_numOfPlayers < MIN_PLAYERS || m_numOfPlayers > MAX_PLAYERS || !isValid);
 
     //check the validity of the name and the roll
     string name;
