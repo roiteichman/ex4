@@ -83,15 +83,6 @@ public:
 
 
     /*
-     * Prints the card info:
-     *
-     * @return
-     *      void
-    */
-    virtual void printInfo() const;
-
-
-    /*
      * C'tor to the "default card" - Treasure card that gives 0 coins
     */
     Card(): m_effect(CardType::Treasure), m_stats() {}

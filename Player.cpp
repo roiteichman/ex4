@@ -2,7 +2,6 @@
 // Created by teich on 04/05/2022.
 //
 #include "Player.h"
-#include "utilities.h"
 
 Player::Player(const char* name, int hp, int force):
     m_name(name),
@@ -18,11 +17,6 @@ Player::Player(const char* name, int hp, int force):
     if(force<=0){
         m_force=STARTING_FORCE;
     }
-}
-
-void Player::printInfo() const
-{
-    printPlayerInfo(m_name, m_level, m_force, m_hp, m_coins);
 }
 
 void Player::levelUp()

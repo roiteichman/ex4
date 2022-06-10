@@ -9,7 +9,7 @@
 const int MAX_HP = 100;
 const int STARTING_FORCE = 5;
 const int STARTING_LEVEL = 1;
-const int STARTING_COINS = 0;
+const int STARTING_COINS = 10;
 const int MAX_LEVEL = 10;
 
 class Player{
@@ -34,16 +34,6 @@ public:
     Player(const Player&) = default;
     virtual ~Player() = default;
     Player& operator=(const Player& other_player) = default;
-
-
-    /*
-     * printInfo - print the info of the player: Name, Level, Force, HP, Coins
-     *
-     * @param
-     * @return
-     *      void
-    */
-    void printInfo() const;
 
 
     /*

@@ -41,23 +41,6 @@ void Card::applyEncounter(Player &player) const
     }
 }
 
-void Card::printInfo() const
-{
-    switch (m_effect) {
-        case CardType::Battle :
-            printBattleCardInfo(m_stats);
-            break;
-        case CardType::Buff :
-            printBuffCardInfo(m_stats);
-            break;
-        case CardType::Heal :
-            printHealCardInfo(m_stats);
-            break;
-        case CardType::Treasure :
-            printTreasureCardInfo(m_stats);
-            break;
-    }
-}
 
 ostream &operator<<(ostream &os, const Card &card) {
     card.print(os);

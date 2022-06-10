@@ -4,6 +4,11 @@
 
 #include "Wizard.h"
 
+Wizard::Wizard(const char *name, int hp, int force):
+Player(name, hp, force)
+{}
+
+
 void Wizard::heal(int n)
 {
     if (n>0) {

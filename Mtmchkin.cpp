@@ -28,24 +28,55 @@ const int TREASURE = 4;
 const int PITFALL = 5;
 const int BARFIGHT = 6;
 const int FAIRY = 7;
+const int ROGUE = 0;
+const int WIZARD = 1;
+const int FIGHTER = 2;
 const int MAX_CHARACTER = 15;
 const int NUM_OF_PLAYERS = 3;
 const char SPACE = ' ';
 const string CARDS_STR[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
 const string PLAYERS_STR[3] = {"Rogue", "Wizard", "Fighter"};
+const int NOT_A_CARD = -1;
 
-Card& strToCard(string str);
+int indexOfCard(string str);
+Card& intToCard(int i);
+Player& intToPlayer(int i);
 bool check_number(string str);
 
-Mtmchkin::Mtmchkin(const std::string fileName) {
+static Queue<Card> m_cardsQueue;
+static Queue<Player> m_playersQueue;
+static Queue<Player> m_winnersPlayers;
+static Queue<Player> m_losersPlayers;
+
+Mtmchkin::Mtmchkin(const std::string fileName):
+m_roundCount(0)
+{
+
+    ifstream source(fileName);
+
+    if(!source){
+        cout<<"Error in opening file!"<<endl;
+
+        ///TO DO: throw Exception while error in name file or in opening
+    }
 
     //creates a cards queue
+
+    /// TO DO: line to collect the getline the cards names and put inside the strToCard!
+
     string CARDS[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
 
-    Queue<Card> m_queue;
+
+
+    int valid;
     //string line;
-    for(int i=0; i<7; i++) {
-        m_queue.pushBack(strToCard((CARDS[i])));
+    ///TO DO - to make it for file with while
+
+    for(int i=0; i<NUM_OF_CARDS; i++) {
+        valid =indexOfCard(CARDS[i]);
+        if (valid != NOT_A_CARD)
+            /// TO DO - is it working?
+            m_cardsQueue.pushBack(intToCard(valid));
     }
 
     //gets the team size
@@ -60,16 +91,16 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
         if (isValid){
             numOfPlayers = std::stoi(str_numOfPlayers);
         }
-        if (numOfPlayers < 2 || numOfPlayers > 6) {
+        if (m_numOfPlayers < 2 || m_numOfPlayers > 6) {
             printInvalidTeamSize();
         }
-    } while (numOfPlayers < 2 || numOfPlayers > 6 || !isValid);
+    } while (m_numOfPlayers < 2 || m_numOfPlayers > 6 || !isValid);
 
     //check the validity of the name and the roll
     string name;
     string roll;
     int j=MAX_CHARACTER, k=0;
-    for (int i = 0; i < numOfPlayers; ++i) {
+    for (int i = 0; i < m_numOfPlayers; ++i) {
         printInsertPlayerMessage();
         {
             cin >> name;
@@ -81,6 +112,8 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
             } else {
                 for (int p = 0; p < NUM_OF_PLAYERS; ++p) {
                     if (!(PLAYERS_STR[p].compare(roll))) {
+                        /// TO DO - is it working?
+                        m_playersQueue.pushBack(intToPlayer(p));
                         break;
                     }
                     if (p == NUM_OF_PLAYERS-1) {
@@ -93,51 +126,62 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     }
 }
 
-
-Card& strToCard(string str)
+Card& intToCard(int i)
 {
-    for (int i = 0; i < NUM_OF_CARDS; ++i) {
-        if (!str.compare(CARDS_STR[i])) {
-            switch (i) {
-                case (GOBLIN): {
-                    Goblin *goblin = new Goblin();
-                    return *goblin;
-                }
-                case (VAMPIRE): {
-                    Vampire *vampire = new Vampire();
-                    return *vampire;
-                }
-                case (DRAGON): {
-                    Dragon *dragon = new Dragon();
-                    return *dragon;
-                }
-                case (MERCHANT): {
-                    Merchant *merchant = new Merchant();
-                    return *merchant;
-                }
-                case (TREASURE): {
-                    Treasure *treasure = new Treasure();
-                    return *treasure;
-                }
-                case (PITFALL): {
-                    Pitfall *pitfall = new Pitfall();
-                    return *pitfall;
-                }
-                case (BARFIGHT): {
-                    Barfight *barfight = new Barfight();
-                    return *barfight;
-                }
-                case (FAIRY): {
-                    Fairy *fairy = new Fairy();
-                    return *fairy;
-                }
-            }
+    switch (i) {
+        case (GOBLIN): {
+            Goblin *goblin = new Goblin();
+            return *goblin;
+        }
+        case (VAMPIRE): {
+            Vampire *vampire = new Vampire();
+            return *vampire;
+        }
+        case (DRAGON): {
+            Dragon *dragon = new Dragon();
+            return *dragon;
+        }
+        case (MERCHANT): {
+            Merchant *merchant = new Merchant();
+            return *merchant;
+        }
+        case (TREASURE): {
+            Treasure *treasure = new Treasure();
+            return *treasure;
+        }
+        case (PITFALL): {
+            Pitfall *pitfall = new Pitfall();
+            return *pitfall;
+        }
+        case (BARFIGHT): {
+            Barfight *barfight = new Barfight();
+            return *barfight;
         }
     }
-    Fairy *fairy1 = new Fairy;
-    return *fairy1;
+    /// TO DO - what happening while the type of the card is non of them?
+
+    Fairy *fairy = new Fairy();
+    return *fairy;
 }
 
+
+Player& intToPlayer(int i, char* name)
+{
+        switch (i) {
+            case (ROGUE): {
+                Rogue *rogue = new Rogue(name);
+                return *rogue;
+            }
+            case (WIZARD): {
+                Wizard *wizard = new Wizard(name);
+                return *wizard;
+            }
+        }
+        /// TO DO - what happening while the type of the card is non of them?
+
+        Fighter *fighter = new Fighter(name);
+        return *fighter;
+}
 
 
 bool check_number(string str)
