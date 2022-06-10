@@ -14,8 +14,10 @@
 #include "Fairy.h"
 #include <fstream>
 using std::ifstream;
+using std::ofstream;
 using std::cin;
 using std::cout;
+using std::endl;
 const int MAX_LENGTH = 16;
 const int NUM_OF_CARDS = 8;
 const int GOBLIN = 0;
@@ -38,15 +40,12 @@ bool check_number(string str);
 Mtmchkin::Mtmchkin(const std::string fileName) {
 
     //creates a cards queue
-    ifstream file(fileName);
-    if (!file) {
-        /// throw Exception if the file is not open
-        /// throw Exception if the file name is not legal
-    }
+    string CARDS[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
+
     Queue<Card> m_queue;
-    char line[MAX_LENGTH];
-    while (!file.getline(line, sizeof(line))) {
-        m_queue.pushBack(strToCard(line));
+    //string line;
+    for(int i=0; i<7; i++) {
+        m_queue.pushBack(strToCard((CARDS[i])));
     }
 
     //gets the team size
@@ -67,46 +66,39 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     } while (numOfPlayers < 2 || numOfPlayers > 6 || !isValid);
 
     //check the validity of the name and the roll
-    char* nameAndRoll;
     string name;
     string roll;
     int j=MAX_CHARACTER, k=0;
     for (int i = 0; i < numOfPlayers; ++i) {
         printInsertPlayerMessage();
-         {
-            while (j>MAX_CHARACTER-1){
-                cin >> nameAndRoll;
-                while (nameAndRoll[k]) {
-                k++;
-                    if (nameAndRoll[k] == SPACE) {
-                        j = k;
-                    }
-                }
-                name.copy(nameAndRoll, j, 0);
-                roll.copy(nameAndRoll, k-j-1 ,j+1);
-                if (j>MAX_CHARACTER-1) {
+        {
+            cin >> name;
+            cin >> roll;
+
+            if (name.length() >= MAX_CHARACTER) {
+                i--;
                 printInvalidName();
-                }
-                else {
-                    for (int i = 0; i < NUM_OF_PLAYERS; ++i) {
-                        if (!(roll.compare(PLAYERS_STR[i]))){
-                            break;
-                        }
-                        if (i==NUM_OF_CARDS){
-                            printInvalidClass();
-                        }
+            } else {
+                for (int p = 0; p < NUM_OF_PLAYERS; ++p) {
+                    if (!(PLAYERS_STR[p].compare(roll))) {
+                        break;
+                    }
+                    if (p == NUM_OF_PLAYERS-1) {
+                        i--;
+                        printInvalidClass();
                     }
                 }
             }
+            cout << roll << endl;
         }
-
     }
 }
+
 
 Card& strToCard(string str)
 {
     for (int i = 0; i < NUM_OF_CARDS; ++i) {
-        if (str.compare(CARDS_STR[i])) {
+        if (!str.compare(CARDS_STR[i])) {
             switch (i) {
                 case (GOBLIN): {
                     Goblin *goblin = new Goblin();
@@ -143,7 +135,10 @@ Card& strToCard(string str)
             }
         }
     }
+    Fairy *fairy1 = new Fairy;
+    return *fairy1;
 }
+
 
 
 bool check_number(string str)
