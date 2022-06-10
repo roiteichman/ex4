@@ -94,7 +94,6 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
 }
 
 Card& strToCard(string str) {
-    //string CARDS_STR[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
     for (int i = 0; i < NUM_OF_CARDS; ++i) {
         if (str.compare(CARDS_STR[i])) {
             switch (i) {
