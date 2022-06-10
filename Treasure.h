@@ -15,9 +15,5 @@ public:
 
 protected:
     void print(ostream &os) const override;
-
-
-private:
-    CardStats m_stats = CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, T_LOOT);
 };
 #endif //CARD_CPP_TREASURE_H

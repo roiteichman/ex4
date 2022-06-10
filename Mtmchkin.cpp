@@ -89,7 +89,6 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
                     }
                 }
             }
-            cout << roll << endl;
         }
     }
 }

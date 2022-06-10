@@ -4,7 +4,7 @@
 #include "Treasure.h"
 
 Treasure::Treasure():
-        Card(CardType::Treasure, m_stats, "Treasure")
+        Card(CardType::Treasure, CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, T_LOOT), "Treasure")
 {}
 
 void Treasure::print(ostream &os) const

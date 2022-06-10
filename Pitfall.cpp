@@ -4,7 +4,7 @@
 #include "Pitfall.h"
 
 Pitfall::Pitfall():
-        Card(CardType::Pitfall, m_stats, "Pitfall")
+        Card(CardType::Pitfall, CardStats(IRRELEVANT, P_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT), "Pitfall")
 {}
 
 void Pitfall::print(ostream &os) const
