@@ -5,7 +5,7 @@
 #include "Fairy.h"
 
 Fairy::Fairy():
-        Card(CardType::Battle, m_stats, "Fairy")
+        Card(CardType::Battle, CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, F_HEAL, IRRELEVANT, IRRELEVANT), "Fairy")
 {}
 
 void Fairy::print(ostream &os) const

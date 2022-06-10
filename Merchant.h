@@ -14,8 +14,6 @@ protected:
     void print(ostream &os) const override;
 
 
-private:
-    CardStats m_stats = CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT);
 };
 
 #endif //CARD_CPP_MERCHANT_H

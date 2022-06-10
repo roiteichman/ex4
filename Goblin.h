@@ -18,8 +18,6 @@ public:
 protected:
     void print(ostream &os) const override;
 
-private:
-    CardStats m_stats = CardStats(G_FORCE, G_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, G_LOOT);
 };
 
 #endif //PLAYER_CPP_GOBLIN_H

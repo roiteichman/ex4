@@ -5,7 +5,7 @@
 #include "Barfight.h"
 
 Barfight::Barfight():
-        Card(CardType::Battle, m_stats, "Barfight")
+        Card(CardType::Battle, CardStats(IRRELEVANT, BF_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT), "Barfight")
 {}
 
 void Barfight::print(ostream &os) const

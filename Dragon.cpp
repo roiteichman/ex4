@@ -5,7 +5,7 @@
 #include "Dragon.h"
 
 Dragon::Dragon():
-        Card(CardType::Battle, m_stats, "Dragon")
+        Card(CardType::Battle, CardStats(D_FORCE, D_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, D_LOOT), "Dragon")
 {}
 
 void Dragon::print(ostream &os) const

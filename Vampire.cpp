@@ -4,7 +4,7 @@
 #include "Vampire.h"
 
 Vampire::Vampire():
-Card(CardType::Battle, m_stats, "Vampire")
+Card(CardType::Battle, CardStats(V_FORCE, V_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, V_LOOT), "Vampire")
 {}
 
 void Vampire::print(ostream &os) const

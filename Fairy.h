@@ -17,8 +17,6 @@ public:
 protected:
     void print(ostream &os) const override;
 
-private:
-    CardStats m_stats = CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, F_HEAL, IRRELEVANT, IRRELEVANT);
 };
 
 

@@ -18,9 +18,6 @@ public:
 protected:
     void print(ostream &os) const override;
 
-
-private:
-    CardStats m_stats = CardStats(V_FORCE, V_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, V_LOOT);
 };
 
 #endif //PLAYER_CPP_VAMPIRE_H

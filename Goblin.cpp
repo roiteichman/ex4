@@ -4,7 +4,7 @@
 #include "Goblin.h"
 
 Goblin::Goblin():
-        Card(CardType::Battle, m_stats, "Goblin")
+Card(CardType::Battle, CardStats(G_FORCE, G_HP_LOSS, IRRELEVANT, IRRELEVANT, IRRELEVANT, G_LOOT), "Goblin")
 {}
 
 void Goblin::print(ostream &os) const
