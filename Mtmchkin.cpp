@@ -12,6 +12,10 @@
 #include "Pitfall.h"
 #include "Barfight.h"
 #include "Fairy.h"
+#include "Player.h"
+#include "Wizard.h"
+#include "Rogue.h"
+#include "Fighter.h"
 #include <fstream>
 using std::ifstream;
 using std::ofstream;
@@ -81,7 +85,6 @@ m_roundCount(0)
 
     //gets the team size
     string str_numOfPlayers;
-    int numOfPlayers;
     printStartGameMessage();
     bool isValid;
     do {
@@ -89,7 +92,7 @@ m_roundCount(0)
         cin >> str_numOfPlayers;
         isValid = check_number(str_numOfPlayers);
         if (isValid){
-            numOfPlayers = std::stoi(str_numOfPlayers);
+            m_numOfPlayers = std::stoi(str_numOfPlayers);
         }
         if (m_numOfPlayers < 2 || m_numOfPlayers > 6) {
             printInvalidTeamSize();
@@ -124,6 +127,68 @@ m_roundCount(0)
             }
         }
     }
+}
+
+
+void Mtmchkin::playRound()
+{
+    int activePlayers = m_playersQueue.size();
+    for(int j=0; j<activePlayers; j++)
+    {
+        printRoundStartMessage(m_roundCount);
+        /// TO DO: arrange the applyEncounter
+        Card currentCard = m_cardsQueue.front();
+        currentCard.applyEncounter(m_playersQueue.front());
+        m_cardsQueue.popFront();
+        m_cardsQueue.pushBack(currentCard);
+
+        // checking if player win
+        if (m_playersQueue.front().getLevel()==MAX_LEVEL)
+        {
+            m_winnersPlayers.pushBack(m_playersQueue.front());
+            m_playersQueue.popFront();
+        }
+        // checking if player lost
+        else if (m_playersQueue.front().isKnockedOut()) {
+            m_losersPlayers.pushBack(m_playersQueue.front());
+            m_playersQueue.popFront();
+        }
+        // else - the player continue to play
+        else {
+            m_playersQueue.pushBack(m_playersQueue.front());
+            m_playersQueue.popFront();
+        }
+        // checking if game over
+        if(isGameOver())
+            printGameEndMessage();
+    }
+
+    m_roundCount++;
+}
+
+int Mtmchkin::getNumberOfRounds() const {
+    return m_roundCount;
+}
+
+bool Mtmchkin::isGameOver() const {
+    return (m_winnersPlayers.size()+ m_losersPlayers.size()==m_numOfPlayers);
+}
+
+Mtmchkin::~Mtmchkin() {
+    /// TO DO: understand how to delete all the memory!
+
+}
+
+
+
+int indexOfCard(string str)
+{
+    for (int i = 0; i < NUM_OF_CARDS; ++i) {
+        if (!str.compare(CARDS_STR[i])){
+            return i;
+        }
+    }
+    return NOT_A_CARD;
 }
 
 Card& intToCard(int i)
