@@ -47,16 +47,20 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
         m_queue.pushBack(strToCard(line));
     }
 
+    //gets the team size
+    string str_numOfPlayers;
     int numOfPlayers;
     printStartGameMessage();
+    bool isValid;
     do {
         printEnterTeamSizeMessage();
         cin >> numOfPlayers;
         if (numOfPlayers < 2 || numOfPlayers > 6) {
             printInvalidTeamSize();
         }
-    } while (numOfPlayers < 2 || numOfPlayers > 6);
+    } while (numOfPlayers < 2 || numOfPlayers > 6 || !isValid);
 
+    //check the validity of the name and the roll
     char* nameAndRoll;
     string name;
     string roll;
@@ -93,7 +97,8 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     }
 }
 
-Card& strToCard(string str) {
+Card& strToCard(string str)
+{
     for (int i = 0; i < NUM_OF_CARDS; ++i) {
         if (str.compare(CARDS_STR[i])) {
             switch (i) {
