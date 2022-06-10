@@ -17,7 +17,7 @@ using std::ifstream;
 using std::cin;
 using std::cout;
 const int MAX_LENGTH = 16;
-const int NUM_OF_CARDS = 6;
+const int NUM_OF_CARDS = 8;
 const int GOBLIN = 0;
 const int VAMPIRE = 1;
 const int DRAGON = 2;
@@ -94,9 +94,9 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
 }
 
 Card& strToCard(string str) {
-    string cards[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
-    for (int i = 0; i <= NUM_OF_CARDS; ++i) {
-        if (str.compare(cards[i])) {
+    //string CARDS_STR[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
+    for (int i = 0; i < NUM_OF_CARDS; ++i) {
+        if (str.compare(CARDS_STR[i])) {
             switch (i) {
                 case (GOBLIN): {
                     Goblin *goblin = new Goblin();
