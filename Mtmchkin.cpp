@@ -33,15 +33,17 @@ const string CARDS_STR[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasur
 const string PLAYERS_STR[3] = {"Rogue", "Wizard", "Fighter"};
 
 Card& strToCard(string str);
+bool check_number(string str);
 
 Mtmchkin::Mtmchkin(const std::string fileName) {
-    Queue<Card> m_queue;
 
+    //creates a cards queue
     ifstream file(fileName);
     if (!file) {
         /// throw Exception if the file is not open
         /// throw Exception if the file name is not legal
     }
+    Queue<Card> m_queue;
     char line[MAX_LENGTH];
     while (!file.getline(line, sizeof(line))) {
         m_queue.pushBack(strToCard(line));
@@ -54,7 +56,11 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     bool isValid;
     do {
         printEnterTeamSizeMessage();
-        cin >> numOfPlayers;
+        cin >> str_numOfPlayers;
+        isValid = check_number(str_numOfPlayers);
+        if (isValid){
+            numOfPlayers = std::stoi(str_numOfPlayers);
+        }
         if (numOfPlayers < 2 || numOfPlayers > 6) {
             printInvalidTeamSize();
         }
@@ -137,4 +143,13 @@ Card& strToCard(string str)
             }
         }
     }
+}
+
+
+bool check_number(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+        if (isdigit(str[i]) == false)
+            return false;
+    return true;
 }
