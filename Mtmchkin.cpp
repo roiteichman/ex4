@@ -178,9 +178,9 @@ Card& intToCard(int i)
 void Mtmchkin::playRound()
 {
     int activePlayers = m_playersQueue.size();
+    printRoundStartMessage(m_roundCount);
     for(int j=0; j<activePlayers; j++)
     {
-        printRoundStartMessage(m_roundCount);
         /// TO DO: arrange the applyEncounter
         Card* currentCard = m_cardsQueue.front();
         currentCard->applyEncounter(*m_playersQueue.front());
