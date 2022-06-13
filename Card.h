@@ -69,7 +69,7 @@ public:
      * @return
      *      A new instance of Card.
     */
-    Card(CardType type, const CardStats& stats, string m_name);
+    Card(CardType type, const CardStats stats, string m_name);
 
 
     /*
@@ -79,7 +79,6 @@ public:
      * @return
      *      void
     */
-    virtual void applyEncounter(Player& player) const;
 
 
     /*

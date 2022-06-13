@@ -10,7 +10,7 @@
 
 class Wizard : public Player{
 public:
-    Wizard(const char* name, int hp = MAX_HP, int force = STARTING_FORCE);
+    Wizard(const std::string name, int hp = MAX_HP, int force = STARTING_FORCE);
     void heal(int n) override;
     ~Wizard()=default;
 };

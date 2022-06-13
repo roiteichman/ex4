@@ -25,7 +25,7 @@ public:
      * @return
      *      A new Player.
     */
-    explicit Player(const char* name, int hp = MAX_HP, int force = STARTING_FORCE);
+    explicit Player(const std::string name, int hp = MAX_HP, int force = STARTING_FORCE);
 
 
     /*
@@ -136,7 +136,7 @@ protected:
     int m_force;
 
 private:
-    const char* m_name;
+    const std::string m_name;
 
 
 };

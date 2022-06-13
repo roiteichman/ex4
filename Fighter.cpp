@@ -4,7 +4,7 @@
 
 #include "Fighter.h"
 
-Fighter::Fighter(const char *name, int hp, int force) :
+Fighter::Fighter(const std::string name, int hp, int force) :
 Player(name, hp, force)
 {}
 

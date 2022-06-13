@@ -4,7 +4,7 @@
 
 #include "Wizard.h"
 
-Wizard::Wizard(const char *name, int hp, int force):
+Wizard::Wizard(const std::string name, int hp, int force):
 Player(name, hp, force)
 {}
 

@@ -58,7 +58,10 @@ public:
 private:
     int m_roundCount;
     int m_numOfPlayers;
-
+    Queue<Player*> m_losersPlayers;
+    Queue<Card*> m_cardsQueue;
+    Queue<Player*> m_playersQueue;
+    Queue<Player*> m_winnersPlayers;
 
 };
 

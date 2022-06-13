@@ -46,47 +46,34 @@ const int MAX_PLAYERS = 6;
 
 int indexOfCard(string str);
 Card& intToCard(int i);
-Player& intToPlayer(int i);
+Player& intToPlayer(int i, string str);
 bool check_number(string str);
 
 static Queue<Card> m_cardsQueue;
 static Queue<Player> m_playersQueue;
 static Queue<Player> m_winnersPlayers;
-static Queue<Player> m_losersPlayers;
 
-Mtmchkin::Mtmchkin(const std::string fileName):
-m_roundCount(0)
-{
-
-    ifstream source(fileName);
-
-    if(!source){
+Mtmchkin::Mtmchkin(const std::string fileName) {
+    ifstream source (fileName);
+    string cardType;
+    if(!source.is_open()){
         cout<<"Error in opening file!"<<endl;
-
         ///TO DO: throw Exception while error in name file or in opening
     }
-
+    std::getline(source,cardType);
     //creates a cards queue
-
-    /// TO DO: line to collect the getline the cards names and put inside the strToCard!
-
     string CARDS[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
 
 
-
-    int valid;
     //string line;
-    ///TO DO - to make it for file with while
-
-    for(int i=0; i<NUM_OF_CARDS; i++) {
-        valid =indexOfCard(CARDS[i]);
-        if (valid != NOT_A_CARD)
-            /// TO DO - is it working?
-            m_cardsQueue.pushBack(intToCard(valid));
+    for(int i=0; i<7; i++) {
+        m_cardsQueue.pushBack(&intToCard(i));
     }
 
     //gets the team size
+
     string str_numOfPlayers;
+    int numOfPlayers;
     printStartGameMessage();
     bool isValid;
     do {
@@ -94,31 +81,29 @@ m_roundCount(0)
         cin >> str_numOfPlayers;
         isValid = check_number(str_numOfPlayers);
         if (isValid){
-            m_numOfPlayers = std::stoi(str_numOfPlayers);
+            numOfPlayers = std::stoi(str_numOfPlayers);
         }
-        if (m_numOfPlayers < MIN_PLAYERS || m_numOfPlayers > MAX_PLAYERS) {
+        if (numOfPlayers < 2 || numOfPlayers > 6) {
             printInvalidTeamSize();
         }
-    } while (m_numOfPlayers < MIN_PLAYERS || m_numOfPlayers > MAX_PLAYERS || !isValid);
+    } while (numOfPlayers < 2 || numOfPlayers > 6 || !isValid);
 
     //check the validity of the name and the roll
     string name;
     string roll;
     int j=MAX_CHARACTER, k=0;
-    for (int i = 0; i < m_numOfPlayers; ++i) {
+    for (int i = 0; i < numOfPlayers; ++i) {
         printInsertPlayerMessage();
         {
             cin >> name;
             cin >> roll;
-
             if (name.length() >= MAX_CHARACTER) {
                 i--;
                 printInvalidName();
             } else {
                 for (int p = 0; p < NUM_OF_PLAYERS; ++p) {
                     if (!(PLAYERS_STR[p].compare(roll))) {
-                        /// TO DO - is it working?
-                        m_playersQueue.pushBack(intToPlayer(p));
+                        m_playersQueue.pushBack(&(intToPlayer(3, PLAYERS_STR[p])));
                         break;
                     }
                     if (p == NUM_OF_PLAYERS-1) {
@@ -132,65 +117,22 @@ m_roundCount(0)
 }
 
 
-void Mtmchkin::playRound()
+Player& intToPlayer(int i, string name)
 {
-    int activePlayers = m_playersQueue.size();
-    for(int j=0; j<activePlayers; j++)
-    {
-        printRoundStartMessage(m_roundCount);
-        /// TO DO: arrange the applyEncounter
-        Card currentCard = m_cardsQueue.front();
-        currentCard.applyEncounter(m_playersQueue.front());
-        m_cardsQueue.popFront();
-        m_cardsQueue.pushBack(currentCard);
-
-        // checking if player win
-        if (m_playersQueue.front().getLevel()==MAX_LEVEL)
-        {
-            m_winnersPlayers.pushBack(m_playersQueue.front());
-            m_playersQueue.popFront();
+    switch (i) {
+        case (ROGUE): {
+            Rogue *rogue = new Rogue(name);
+            return *rogue;
         }
-        // checking if player lost
-        else if (m_playersQueue.front().isKnockedOut()) {
-            m_losersPlayers.pushBack(m_playersQueue.front());
-            m_playersQueue.popFront();
-        }
-        // else - the player continue to play
-        else {
-            m_playersQueue.pushBack(m_playersQueue.front());
-            m_playersQueue.popFront();
-        }
-        // checking if game over
-        if(isGameOver())
-            printGameEndMessage();
-    }
-
-    m_roundCount++;
-}
-
-int Mtmchkin::getNumberOfRounds() const {
-    return m_roundCount;
-}
-
-bool Mtmchkin::isGameOver() const {
-    return (m_winnersPlayers.size()+ m_losersPlayers.size()==m_numOfPlayers);
-}
-
-Mtmchkin::~Mtmchkin() {
-    /// TO DO: understand how to delete all the memory!
-
-}
-
-
-
-int indexOfCard(string str)
-{
-    for (int i = 0; i < NUM_OF_CARDS; ++i) {
-        if (!str.compare(CARDS_STR[i])){
-            return i;
+        case (WIZARD): {
+            Wizard *wizard = new Wizard(name);
+            return *wizard;
         }
     }
-    return NOT_A_CARD;
+    /// TO DO - what happening while the type of the card is non of them?
+
+    Fighter *fighter = new Fighter(name);
+    return *fighter;
 }
 
 Card& intToCard(int i)
@@ -232,24 +174,6 @@ Card& intToCard(int i)
 }
 
 
-Player& intToPlayer(int i, char* name)
-{
-        switch (i) {
-            case (ROGUE): {
-                Rogue *rogue = new Rogue(name);
-                return *rogue;
-            }
-            case (WIZARD): {
-                Wizard *wizard = new Wizard(name);
-                return *wizard;
-            }
-        }
-        /// TO DO - what happening while the type of the card is non of them?
-
-        Fighter *fighter = new Fighter(name);
-        return *fighter;
-}
-
 
 bool check_number(string str)
 {
@@ -257,4 +181,54 @@ bool check_number(string str)
         if (isdigit(str[i]) == false)
             return false;
     return true;
+}
+
+void Mtmchkin::playRound()
+{
+    int activePlayers = m_playersQueue.size();
+    for(int j=0; j<activePlayers; j++)
+    {
+        printRoundStartMessage(m_roundCount);
+        /// TO DO: arrange the applyEncounter
+        Card currentCard = m_cardsQueue.front();
+        currentCard.applyEncounter(m_playersQueue.front());
+        m_cardsQueue.popFront();
+        m_cardsQueue.pushBack(currentCard);
+        m_losersPlayers.pushBack
+
+        // checking if player win
+        if (m_playersQueue.front().getLevel()==MAX_LEVEL)
+        {
+            m_winnersPlayers.pushBack(m_playersQueue.front());
+            m_playersQueue.popFront();
+        }
+            // checking if player lost
+        else if (m_playersQueue.front().isKnockedOut()) {
+            m_losersPlayers.pushBack(m_playersQueue.front());
+            m_playersQueue.popFront();
+        }
+            // else - the player continue to play
+        else {
+            m_playersQueue.pushBack(m_playersQueue.front());
+            m_playersQueue.popFront();
+        }
+        // checking if game over
+        if(isGameOver())
+            printGameEndMessage();
+    }
+
+    m_roundCount++;
+}
+
+int Mtmchkin::getNumberOfRounds() const {
+    return m_roundCount;
+}
+
+bool Mtmchkin::isGameOver() const {
+    return (m_winnersPlayers.size()+ m_losersPlayers.size()==m_numOfPlayers);
+}
+
+Mtmchkin::~Mtmchkin() {
+    /// TO DO: understand how to delete all the memory!
+
 }

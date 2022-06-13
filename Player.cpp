@@ -3,7 +3,7 @@
 //
 #include "Player.h"
 
-Player::Player(const char* name, int hp, int force):
+Player::Player(const std::string name, int hp, int force):
     m_name(name),
     m_maxHP(hp),
     m_hp(m_maxHP),

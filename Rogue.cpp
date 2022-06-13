@@ -4,7 +4,7 @@
 
 #include "Rogue.h"
 
-Rogue::Rogue(const char *name, int hp, int force) :
+Rogue::Rogue(const std::string name, int hp, int force) :
 Player(name, hp, force)
 {}
 
