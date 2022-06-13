@@ -175,15 +175,6 @@ Card& intToCard(int i)
 }
 
 
-
-bool checkNumber(string str)
-{
-    for (int i = 0; i < str.length(); i++)
-        if (isdigit(str[i]) == false)
-            return false;
-    return true;
-}
-
 void Mtmchkin::playRound()
 {
     int activePlayers = m_playersQueue.size();
