@@ -22,6 +22,7 @@ using std::ofstream;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::getline;
 const int MAX_LENGTH = 16;
 const int NUM_OF_CARDS = 8;
 const int GOBLIN = 0;
@@ -46,8 +47,8 @@ const int MAX_PLAYERS = 6;
 
 int indexOfCard(string str);
 Card& intToCard(int i);
-Player& intToPlayer(int i, string str);
-bool check_number(string str);
+Player& intToPlayer(int i, string str, string type);
+bool checkNumber(string str);
 
 static Queue<Card> m_cardsQueue;
 static Queue<Player> m_playersQueue;
@@ -60,7 +61,7 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
         cout<<"Error in opening file!"<<endl;
         ///TO DO: throw Exception while error in name file or in opening
     }
-    std::getline(source,cardType);
+    getline(source,cardType);
     //creates a cards queue
     string CARDS[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
 
@@ -90,20 +91,20 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
 
     //check the validity of the name and the roll
     string name;
-    string roll;
+    string type;
     int j=MAX_CHARACTER, k=0;
     for (int i = 0; i < numOfPlayers; ++i) {
         printInsertPlayerMessage();
         {
             cin >> name;
-            cin >> roll;
+            cin >> type;
             if (name.length() >= MAX_CHARACTER) {
                 i--;
                 printInvalidName();
             } else {
                 for (int p = 0; p < NUM_OF_PLAYERS; ++p) {
-                    if (!(PLAYERS_STR[p].compare(roll))) {
-                        m_playersQueue.pushBack(&(intToPlayer(3, PLAYERS_STR[p])));
+                    if (!(PLAYERS_STR[p].compare(type))) {
+                        m_playersQueue.pushBack(&(intToPlayer(p, name, type)));
                         break;
                     }
                     if (p == NUM_OF_PLAYERS-1) {
@@ -121,7 +122,7 @@ Player& intToPlayer(int i, string name)
 {
     switch (i) {
         case (ROGUE): {
-            Rogue *rogue = new Rogue(name);
+            Rogue *rogue = new Rogue(name, type);
             return *rogue;
         }
         case (WIZARD): {
@@ -131,7 +132,7 @@ Player& intToPlayer(int i, string name)
     }
     /// TO DO - what happening while the type of the card is non of them?
 
-    Fighter *fighter = new Fighter(name);
+    Fighter *fighter = new Fighter(name, type);
     return *fighter;
 }
 
@@ -203,7 +204,7 @@ void Mtmchkin::playRound()
             m_playersQueue.popFront();
         }
             // checking if player lost
-        else if (m_playersQueue.front().isKnockedOut()) {
+        else if (m_playersQueue.front()->isKnockedOut()) {
             m_losersPlayers.pushBack(m_playersQueue.front());
             m_playersQueue.popFront();
         }

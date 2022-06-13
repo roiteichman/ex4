@@ -3,8 +3,9 @@
 //
 #include "Player.h"
 
-Player::Player(const std::string name, int hp, int force):
+Player::Player(const string name, const string type, int hp, int force):
     m_name(name),
+    m_type(type),
     m_maxHP(hp),
     m_hp(m_maxHP),
     m_force(force),
@@ -33,10 +34,8 @@ int Player::getLevel() const
 
 void Player::buff(int n)
 {
-    if(n>0)
-    {
-        m_force+=n;
-    }
+    // work also when get number smaller than Zero, for the Vampire
+    m_force+=n;
 }
 
 void Player::heal(int n)
@@ -83,6 +82,11 @@ bool Player::pay(int n)
     }
     return true;
 }
+
+int Player::get_money() {
+    return m_coins;
+}
+
 
 int Player::getAttackStrength() const
 {

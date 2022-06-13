@@ -1,10 +1,13 @@
 //
 // Created by teich on 04/05/2022.
 //
-
 #include <string>
+#include "HealthPoints.h"
+
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
+
+using std::string;
 
 const int MAX_HP = 100;
 const int STARTING_FORCE = 5;
@@ -25,7 +28,7 @@ public:
      * @return
      *      A new Player.
     */
-    explicit Player(const std::string name, int hp = MAX_HP, int force = STARTING_FORCE);
+    explicit Player(const string name, const string type, int hp = MAX_HP, int force = STARTING_FORCE);
 
 
     /*
@@ -117,6 +120,14 @@ public:
     */
     bool pay(int n);
 
+    /*
+     * get_money
+     *
+     * @param
+     * @return
+     *      the amount of money that the players has
+    */
+    int get_money();
 
     /*
      * getAttackStrength -
@@ -128,15 +139,17 @@ public:
     */
     virtual int getAttackStrength() const;
 
+    const std::string m_name;
+    const std::string m_type;
+
 protected:
     int m_coins;
-    int m_maxHP;
-    int m_hp;
+    HealthPoints m_maxHP;
+    HealthPoints m_hp;
     int m_level;
     int m_force;
 
 private:
-    const std::string m_name;
 
 
 };

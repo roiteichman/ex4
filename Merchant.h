@@ -10,6 +10,8 @@ public:
     Merchant();
     ~Merchant() override =default;
 
+    void applyEncounter(Player& player) const override;
+
 protected:
     void print(ostream &os) const override;
 

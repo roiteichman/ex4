@@ -14,6 +14,9 @@ public:
     Fairy();
     ~Fairy() override =default;
 
+    void applyEncounter(Player& player) const override;
+
+
 protected:
     void print(ostream &os) const override;
 

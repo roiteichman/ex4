@@ -72,13 +72,7 @@ public:
     Card(CardType type, const CardStats stats, string m_name);
 
 
-    /*
-     * Handling the player's applyEncounter with the card:
-     *
-     * @param player - The player.
-     * @return
-     *      void
-    */
+
 
 
     /*
@@ -94,15 +88,25 @@ public:
     virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
 
+/*
+ * Handling the player's applyEncounter with the card:
+ *
+ * @param player - The player.
+ * @return
+ *      void
+*/
+virtual void applyEncounter(Player& player) const;
+
 protected:
     friend ostream & operator<<(ostream& os, const Card& card);
     virtual void print (ostream& os) const;
 
+
 protected:
     string m_name;
-private:
     CardType m_effect;
     CardStats m_stats;
+private:
 
 };
 

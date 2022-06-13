@@ -4,8 +4,8 @@
 
 #include "Wizard.h"
 
-Wizard::Wizard(const std::string name, int hp, int force):
-Player(name, hp, force)
+Wizard::Wizard(const string name, const string type, int hp, int force):
+Player(name, type, hp, force)
 {}
 
 

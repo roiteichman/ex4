@@ -1,5 +1,7 @@
 #include <string>
 #include "Queue.h"
+#include "Player.h"
+#include "Card.h"
 
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
