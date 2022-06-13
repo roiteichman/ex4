@@ -80,7 +80,7 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     do {
         printEnterTeamSizeMessage();
         cin >> str_numOfPlayers;
-        isValid = check_number(str_numOfPlayers);
+        isValid = checkNumber(str_numOfPlayers);
         if (isValid){
             numOfPlayers = std::stoi(str_numOfPlayers);
         }
