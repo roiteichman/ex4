@@ -1,12 +1,12 @@
 //
 // Created by teich on 04/05/2022.
 //
-#include <string>
-#include "HealthPoints.h"
-
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
+#include <string>
+#include "HealthPoints.h"
+#include "utilities.h"
 using std::string;
 
 const int MAX_HP = 100;
