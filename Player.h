@@ -130,8 +130,8 @@ public:
 
 protected:
     int m_coins;
-    int m_hp;
     int m_maxHP;
+    int m_hp;
     int m_level;
     int m_force;
 
