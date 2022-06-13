@@ -6,6 +6,24 @@
 // Created by shlom on 09/06/2022.
 //
 #include "Merchant.h"
+#include <fstream>
+using std::ifstream;
+using std::ofstream;
+using std::ostream;
+using std::cin;
+using std::cout;
+using std::getline;
+bool checkNumber(string str);
+const int BUY_NOTHING =0;
+const int BUY_HP = 1;
+const int BUY_BUFF = 2;
+const int PRICE_HP = 5;
+const int PRICE_BUFF = 10;
+const int MERCHANT_HEAL = 1;
+const int MERCHANT_BUFF = 1;
+
+
+
 
 Merchant::Merchant():
         Card(CardType::Battle, CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT), "Merchant")

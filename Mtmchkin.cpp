@@ -118,7 +118,7 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
 }
 
 
-Player& intToPlayer(int i, string name)
+Player& intToPlayer(int i, string name, string type)
 {
     switch (i) {
         case (ROGUE): {
@@ -126,7 +126,7 @@ Player& intToPlayer(int i, string name)
             return *rogue;
         }
         case (WIZARD): {
-            Wizard *wizard = new Wizard(name);
+            Wizard *wizard = new Wizard(name, type);
             return *wizard;
         }
     }
@@ -176,7 +176,7 @@ Card& intToCard(int i)
 
 
 
-bool check_number(string str)
+bool checkNumber(string str)
 {
     for (int i = 0; i < str.length(); i++)
         if (isdigit(str[i]) == false)
@@ -191,14 +191,13 @@ void Mtmchkin::playRound()
     {
         printRoundStartMessage(m_roundCount);
         /// TO DO: arrange the applyEncounter
-        Card currentCard = m_cardsQueue.front();
-        currentCard.applyEncounter(m_playersQueue.front());
+        Card* currentCard = m_cardsQueue.front();
+        currentCard->applyEncounter(*m_playersQueue.front());
         m_cardsQueue.popFront();
         m_cardsQueue.pushBack(currentCard);
-        m_losersPlayers.pushBack
 
         // checking if player win
-        if (m_playersQueue.front().getLevel()==MAX_LEVEL)
+        if (m_playersQueue.front()->getLevel()==MAX_LEVEL)
         {
             m_winnersPlayers.pushBack(m_playersQueue.front());
             m_playersQueue.popFront();

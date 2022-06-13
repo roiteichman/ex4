@@ -4,8 +4,8 @@
 
 #include "Fighter.h"
 
-Fighter::Fighter(const std::string name, int hp, int force) :
-Player(name, hp, force)
+Fighter::Fighter(const string name, const string type, int hp, int force) :
+Player(name, type, hp, force)
 {}
 
 int Fighter::getAttackStrength() const {
