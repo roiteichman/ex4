@@ -63,11 +63,11 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     }
     getline(source,cardType);
     //creates a cards queue
-    string CARDS[8] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
+    string CARDS[NUM_OF_CARDS] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
 
 
     //string line;
-    for(int i=0; i<7; i++) {
+    for(int i=0; i<NUM_OF_CARDS; i++) {
         m_cardsQueue.pushBack(&intToCard(i));
     }
 
@@ -84,10 +84,10 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
         if (isValid){
             numOfPlayers = std::stoi(str_numOfPlayers);
         }
-        if (numOfPlayers < 2 || numOfPlayers > 6) {
+        if (numOfPlayers < MIN_PLAYERS || numOfPlayers > MAX_PLAYERS) {
             printInvalidTeamSize();
         }
-    } while (numOfPlayers < 2 || numOfPlayers > 6 || !isValid);
+    } while (numOfPlayers < MIN_PLAYERS || numOfPlayers > MAX_PLAYERS || !isValid);
 
     //check the validity of the name and the roll
     string name;
