@@ -6,7 +6,6 @@
 
 #include <string>
 #include "HealthPoints.h"
-#include "utilities.h"
 using std::string;
 
 const int MAX_HP = 100;

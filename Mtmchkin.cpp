@@ -16,6 +16,7 @@
 #include "Wizard.h"
 #include "Rogue.h"
 #include "Fighter.h"
+#include "utilities.h"
 #include <fstream>
 using std::ifstream;
 using std::ofstream;
@@ -51,20 +52,25 @@ Player& intToPlayer(int i, string str, string type);
 bool checkNumber(string str);
 
 Mtmchkin::Mtmchkin(const std::string fileName) {
-    ifstream source (fileName);
+    ifstream source(fileName);
     string cardType;
-    if(!source.is_open()){
+    if(!source.fail()){
         cout<<"Error in opening file!"<<endl;
         ///TO DO: throw Exception while error in name file or in opening
     }
-    getline(source,cardType);
+    string str_numOfCards;
+    while(getline(source,cardType)){
+        for(int i=0; i<NUM_OF_CARDS; i++)
+            if(!CARDS_STR[i].compare(cardType))
+                m_cardsQueue.pushBack(&intToCard(i));
+        }
     //creates a cards queue
 
 
     //string line;
-    for(int i=0; i<NUM_OF_CARDS; i++) {
+    /*for(int i=0; i<NUM_OF_CARDS; i++) {
         m_cardsQueue.pushBack(&intToCard(i));
-    }
+    }*/
 
     //gets the team size
 
@@ -239,4 +245,29 @@ Mtmchkin::~Mtmchkin() {
         delete m_playersQueue.front();
         m_playersQueue.popFront();
     }
+}
+
+void Mtmchkin::printLeaderBoard() const {
+    printLeaderBoardStartMessage();
+    int i=1;
+    bool changeQueue = true;
+    Queue<Player*> tmpQueue = m_winnersPlayers;
+    while(!tmpQueue.isEmpty()){
+        printPlayerLeaderBoard(i, *tmpQueue.front());
+        tmpQueue.popFront();
+        i++;
+        if (tmpQueue.isEmpty() && changeQueue){
+            changeQueue = false;
+            tmpQueue = m_playersQueue;
+        }
+    }
+    Queue<Player*> tmpQueueReverse = m_losersPlayers;
+    tmpQueueReverse.front()=m_losersPlayers.
+
+
+
+
+
+    //printPlayerLeaderBoard(int ranking, const Player &player);
+
 }

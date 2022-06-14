@@ -2,6 +2,8 @@
 // Created by teich on 04/05/2022.
 //
 #include "Player.h"
+#include "utilities.h"
+
 
 Player::Player(const string name, const string type, int hp, int force):
     m_name(name),
