@@ -204,7 +204,7 @@ void Mtmchkin::playRound()
             m_playersQueue.popFront();
         }
         // checking if game over
-        if(isGameOver())
+        if(!isGameOver())
             printGameEndMessage();
     }
 
