@@ -11,6 +11,7 @@ Card::Card(CardType type, const CardStats stats, std::string name):
     m_stats(stats)
 {}
 
+
 ostream &operator<<(ostream &os, const Card &card) {
     card.print(os);
     return os;

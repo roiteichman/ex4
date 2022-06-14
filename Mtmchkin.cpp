@@ -60,6 +60,7 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     getline(source,cardType);
     //creates a cards queue
 
+
     //string line;
     for(int i=0; i<NUM_OF_CARDS; i++) {
         m_cardsQueue.pushBack(&intToCard(i));

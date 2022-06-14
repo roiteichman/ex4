@@ -49,6 +49,7 @@ void Player::heal(int n)
     }
 }
 
+
 void Player::damage(int n)
 {
     if(n>0) {
