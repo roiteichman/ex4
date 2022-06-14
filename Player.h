@@ -143,11 +143,12 @@ public:
     const std::string m_type;
 
 protected:
-    int m_coins;
     HealthPoints m_maxHP;
     HealthPoints m_hp;
-    int m_level;
     int m_force;
+    int m_level;
+    int m_coins;
+
 
 private:
 

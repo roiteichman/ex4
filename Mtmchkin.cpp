@@ -50,10 +50,6 @@ Card& intToCard(int i);
 Player& intToPlayer(int i, string str, string type);
 bool checkNumber(string str);
 
-static Queue<Card> m_cardsQueue;
-static Queue<Player> m_playersQueue;
-static Queue<Player> m_winnersPlayers;
-
 Mtmchkin::Mtmchkin(const std::string fileName) {
     ifstream source (fileName);
     string cardType;
@@ -63,8 +59,6 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     }
     getline(source,cardType);
     //creates a cards queue
-    string CARDS[NUM_OF_CARDS] = {"Goblin", "Vampire", "Dragon", "Merchant", "Treasure", "Pitfall", "Barfight", "Fairy"};
-
 
     //string line;
     for(int i=0; i<NUM_OF_CARDS; i++) {
