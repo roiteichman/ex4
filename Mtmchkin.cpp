@@ -214,6 +214,29 @@ bool Mtmchkin::isGameOver() const {
 }
 
 Mtmchkin::~Mtmchkin() {
-    /// TO DO: understand how to delete all the memory!
-
+    while(!m_losersPlayers.isEmpty())
+    {
+        delete m_losersPlayers.front();
+        m_losersPlayers.popFront();
+    }
+    while(!m_cardsQueue.isEmpty())
+    {
+        delete m_cardsQueue.front();
+        m_cardsQueue.popFront();
+    }
+    while(!m_winnersPlayers.isEmpty())
+    {
+        delete m_winnersPlayers.front();
+        m_winnersPlayers.popFront();
+    }
+    while(!m_winnersPlayers.isEmpty())
+    {
+        delete m_winnersPlayers.front();
+        m_winnersPlayers.popFront();
+    }
+    while (!m_playersQueue.isEmpty())
+    {
+        delete m_playersQueue.front();
+        m_playersQueue.popFront();
+    }
 }
