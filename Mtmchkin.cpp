@@ -92,7 +92,6 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
     //check the validity of the name and the roll
     string name;
     string type;
-    int j=MAX_CHARACTER, k=0;
     for (int i = 0; i < numOfPlayers; ++i) {
         printInsertPlayerMessage();
         {
