@@ -38,33 +38,37 @@ void Merchant::applyEncounter(Player &player) const {
     printMerchantInitialMessageForInteractiveEncounter(cout ,player.m_name, player.get_money());
         cin >> strChoice;
         isValid = checkNumber(strChoice);
-        if (isValid){
-            numChoice = std::stoi(strChoice);
-            switch (numChoice) {
-                case BUY_NOTHING:
-                    printMerchantSummary(cout, player.m_name, BUY_NOTHING, BUY_NOTHING);
-                    break;
-                case BUY_HP:
-                    if(player.pay(PRICE_HP)) {
-                        player.heal(MERCHANT_HEAL);
-                        printMerchantSummary(cout, player.m_name, BUY_HP, PRICE_HP);
-
-                    }
-                    else{
-                        printMerchantInsufficientCoins(cout);
-                    }
-                    break;
-                case PRICE_BUFF:
-                    if (player.pay(PRICE_BUFF)){
-                        player.buff(MERCHANT_BUFF);
-                        printMerchantSummary(cout, player.m_name, BUY_BUFF, PRICE_BUFF);
-                    }
-                    else{
-                        printMerchantInsufficientCoins(cout);
-                    }
-                    break;
-            }
+        if (!isValid){
+            printInvalidInput();
         }
+    }
+    if (isValid){
+        numChoice = std::stoi(strChoice);
+        switch (numChoice) {
+            case BUY_NOTHING:
+                printMerchantSummary(cout, player.getName(), BUY_NOTHING, BUY_NOTHING);
+                break;
+            case BUY_HP:
+                if(player.pay(PRICE_HP)) {
+                    player.heal(MERCHANT_HEAL);
+                    printMerchantSummary(cout, player.getName(), BUY_HP, PRICE_HP);
+
+                }
+                else{
+                    printMerchantInsufficientCoins(cout);
+                }
+                break;
+            case PRICE_BUFF:
+                if (player.pay(PRICE_BUFF)){
+                    player.buff(MERCHANT_BUFF);
+                    printMerchantSummary(cout, player.getName(), BUY_BUFF, PRICE_BUFF);
+                }
+                else{
+                    printMerchantInsufficientCoins(cout);
+                }
+                break;
+        }
+    }
 }
 
 

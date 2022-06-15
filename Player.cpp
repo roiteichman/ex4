@@ -109,3 +109,7 @@ ostream &operator<<(ostream &os, const Player &player) {
 string Player::getType() {
     return m_type;
 }
+
+string Player::getName() {
+    return m_name;
+}
