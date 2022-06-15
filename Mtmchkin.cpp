@@ -45,6 +45,7 @@ const string PLAYERS_STR[3] = {"Rogue", "Wizard", "Fighter"};
 const int NOT_A_CARD = -1;
 const int MIN_PLAYERS = 2;
 const int MAX_PLAYERS = 6;
+const int NON_LOSERS_QUEUES = 2;
 
 int indexOfCard(string str);
 Card& intToCard(int i);
@@ -253,7 +254,7 @@ void Mtmchkin::printLeaderBoard() const {
     int i=1;
     bool changeQueue = true;
     Queue<Player*> tmpQueue = m_winnersPlayers;
-    for(int j = 0; j<2; j++){
+    for(int j = 0; j<NON_LOSERS_QUEUES; j++){
         while(!tmpQueue.isEmpty()){
             printPlayerLeaderBoard(i, *tmpQueue.front());
             tmpQueue.popFront();
