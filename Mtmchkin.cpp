@@ -183,7 +183,7 @@ void Mtmchkin::playRound()
     printRoundStartMessage(m_roundCount);
     for(int j=0; j<activePlayers; j++)
     {
-        /// TO DO: arrange the applyEncounter
+        printTurnStartMessage(m_playersQueue.front()->getName());
         Card* currentCard = m_cardsQueue.front();
         currentCard->applyEncounter(*m_playersQueue.front());
         m_cardsQueue.popFront();
@@ -209,7 +209,7 @@ void Mtmchkin::playRound()
         if(!isGameOver())
             printGameEndMessage();
     }
-
+    printLeaderBoard();
     m_roundCount++;
 }
 
