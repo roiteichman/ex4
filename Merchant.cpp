@@ -26,7 +26,7 @@ const int MERCHANT_BUFF = 1;
 
 
 Merchant::Merchant():
-        Card(CardType::Battle, CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT), "Merchant")
+        Card(CardType::Merchant, CardStats(IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT, IRRELEVANT), "Merchant")
 {}
 
 void Merchant::applyEncounter(Player &player) const {
