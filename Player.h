@@ -142,11 +142,15 @@ public:
     const std::string m_type;
 
 protected:
-    HealthPoints m_maxHP;
-    HealthPoints m_hp;
+    int m_maxHP;
+    int m_hp;
     int m_force;
     int m_level;
     int m_coins;
+
+    friend ostream & operator<<(ostream& os, const Player& player);
+    virtual void print (ostream& os) const;
+
 
 
 

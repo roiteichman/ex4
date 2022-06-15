@@ -3,6 +3,7 @@
 //
 
 #include "Fighter.h"
+#include "utilities.h"
 
 Fighter::Fighter(const string name, const string type, int hp, int force) :
 Player(name, type, hp, force)
@@ -11,4 +12,3 @@ Player(name, type, hp, force)
 int Fighter::getAttackStrength() const {
     return m_level + 2*m_force;
 }
-

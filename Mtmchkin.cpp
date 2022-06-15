@@ -50,6 +50,7 @@ int indexOfCard(string str);
 Card& intToCard(int i);
 Player& intToPlayer(int i, string str, string type);
 bool checkNumber(string str);
+void printBack(Queue<Player*> queue, int& i);
 
 Mtmchkin::Mtmchkin(const std::string fileName) {
     ifstream source(fileName);
@@ -261,13 +262,18 @@ void Mtmchkin::printLeaderBoard() const {
             tmpQueue = m_playersQueue;
         }
     }
-    Queue<Player*> tmpQueueReverse = m_losersPlayers;
-    tmpQueueReverse.front()=m_losersPlayers.
+    tmpQueue = m_losersPlayers;
+    printBack(tmpQueue, i);
 
+}
 
-
-
-
-    //printPlayerLeaderBoard(int ranking, const Player &player);
-
+void printBack(Queue<Player*> queue, int& i)
+{
+    if(queue.isEmpty())
+        return;
+    Player* player = queue.front();
+    queue.popFront();
+    printBack(queue, i);
+    printPlayerLeaderBoard(i, *player);
+    i++;
 }

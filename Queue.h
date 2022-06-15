@@ -122,24 +122,6 @@ public:
 
 
     /*
-    * return the last element in the queue by referene
-    *
-    * @param
-    * @return
-    *      reference to the last element in the queue
-    */
-    T& last() const
-    {
-        //if (isEmpty()) {
-            //throw EmptyQueue();
-        //}
-        //return m_first->getData();
-    /// TO DO: finish this function
-    }
-
-
-
-    /*
     * delete the first element in the queue
     *
     * @param
@@ -159,29 +141,6 @@ public:
         m_counter--;
         delete tmp;
     }
-
-    /*
-    * delete the first element in the queue
-    *
-    * @param
-    * @return
-    *     void
-    */
-    void popLast()
-    {
-        /*if ( isEmpty() ){
-            throw EmptyQueue();
-        }
-        if (m_first == nullptr){
-            return;
-        }
-        Node<T>* tmp = m_first;
-        m_first = m_first->getNext();
-        m_counter--;
-        delete tmp;*/
-        /// TO DO: finish this function
-    }
-
 
     /*
     * return the number of elements in the queue
