@@ -138,10 +138,11 @@ public:
     */
     virtual int getAttackStrength() const;
 
-    const std::string m_name;
-    const std::string m_type;
+    string getType();
 
 protected:
+    const std::string m_name;
+    const std::string m_type;
     int m_maxHP;
     int m_hp;
     int m_force;
