@@ -57,6 +57,7 @@ void Merchant::applyEncounter(Player &player) const {
                 else {
                     printMerchantInsufficientCoins(cout);
                     price = NOT_ENOUGH_MONEY;
+                    numChoice = NOT_ENOUGH_MONEY;
                 }
                 break;
             case BUY_BUFF:
@@ -67,6 +68,7 @@ void Merchant::applyEncounter(Player &player) const {
                 else {
                     printMerchantInsufficientCoins(cout);
                     price = NOT_ENOUGH_MONEY;
+                    numChoice = NOT_ENOUGH_MONEY;
                 }
                 break;
         }
