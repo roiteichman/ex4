@@ -139,6 +139,7 @@ public:
     virtual int getAttackStrength() const;
 
     string getType();
+    string getName();
 
 protected:
     const std::string m_name;

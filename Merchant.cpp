@@ -33,9 +33,9 @@ void Merchant::applyEncounter(Player &player) const {
     string strChoice;
     int numChoice;
     printStartGameMessage();
-    bool isValid;
-    /// To Do - it this the way to work with cout?
-    printMerchantInitialMessageForInteractiveEncounter(cout ,player.m_name, player.get_money());
+    bool isValid = false;
+    printMerchantInitialMessageForInteractiveEncounter(cout ,player.getName(), player.get_money());
+    while (!isValid) {
         cin >> strChoice;
         isValid = checkNumber(strChoice);
         if (!isValid){
