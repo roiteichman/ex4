@@ -37,7 +37,12 @@ int Player::getLevel() const
 void Player::buff(int n)
 {
     // work also when get number smaller than Zero, for the Vampire
-    m_force+=n;
+    if (m_force + n < 0) {
+        m_force = 0;
+    }
+    else {
+            m_force+=n;
+        }
 }
 
 void Player::heal(int n)
