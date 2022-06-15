@@ -21,7 +21,7 @@ const int PRICE_HP = 5;
 const int PRICE_BUFF = 10;
 const int MERCHANT_HEAL = 1;
 const int MERCHANT_BUFF = 1;
-
+const int NOT_ENOUGH_MONEY = 0;
 
 
 
@@ -44,30 +44,32 @@ void Merchant::applyEncounter(Player &player) const {
     }
     if (isValid){
         numChoice = std::stoi(strChoice);
+        int price;
         switch (numChoice) {
             case BUY_NOTHING:
-                printMerchantSummary(cout, player.getName(), BUY_NOTHING, BUY_NOTHING);
+                price = BUY_NOTHING;
                 break;
             case BUY_HP:
                 if(player.pay(PRICE_HP)) {
                     player.heal(MERCHANT_HEAL);
-                    printMerchantSummary(cout, player.getName(), BUY_HP, PRICE_HP);
-
+                    price = PRICE_HP;
                 }
-                else{
+                else {
                     printMerchantInsufficientCoins(cout);
+                    price = NOT_ENOUGH_MONEY;
                 }
                 break;
             case BUY_BUFF:
                 if (player.pay(PRICE_BUFF)){
                     player.buff(MERCHANT_BUFF);
-                    printMerchantSummary(cout, player.getName(), BUY_BUFF, PRICE_BUFF);
+                    price = PRICE_BUFF;
                 }
-                else{
+                else {
                     printMerchantInsufficientCoins(cout);
                 }
                 break;
         }
+        printMerchantSummary(cout, player.getName(), numChoice, price);
     }
 }
 
