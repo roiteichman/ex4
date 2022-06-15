@@ -58,7 +58,7 @@ void Merchant::applyEncounter(Player &player) const {
                     printMerchantInsufficientCoins(cout);
                 }
                 break;
-            case PRICE_BUFF:
+            case BUY_BUFF:
                 if (player.pay(PRICE_BUFF)){
                     player.buff(MERCHANT_BUFF);
                     printMerchantSummary(cout, player.getName(), BUY_BUFF, PRICE_BUFF);
