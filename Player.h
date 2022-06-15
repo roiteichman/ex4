@@ -150,7 +150,6 @@ protected:
 
     friend ostream & operator<<(ostream& os, const Player& player);
 
-
 private:
 
 
