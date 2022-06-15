@@ -149,9 +149,6 @@ protected:
     int m_coins;
 
     friend ostream & operator<<(ostream& os, const Player& player);
-    virtual void print (ostream& os) const;
-
-
 
 
 private:
