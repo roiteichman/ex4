@@ -253,14 +253,13 @@ void Mtmchkin::printLeaderBoard() const {
     int i=1;
     bool changeQueue = true;
     Queue<Player*> tmpQueue = m_winnersPlayers;
-    while(!tmpQueue.isEmpty()){
-        printPlayerLeaderBoard(i, *tmpQueue.front());
-        tmpQueue.popFront();
-        i++;
-        if (tmpQueue.isEmpty() && changeQueue){
-            changeQueue = false;
-            tmpQueue = m_playersQueue;
+    for(int j = 0; j<2; j++){
+        while(!tmpQueue.isEmpty()){
+            printPlayerLeaderBoard(i, *tmpQueue.front());
+            tmpQueue.popFront();
+            i++;
         }
+        tmpQueue = m_playersQueue;
     }
     tmpQueue = m_losersPlayers;
     printBack(tmpQueue, i);
