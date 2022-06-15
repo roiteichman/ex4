@@ -34,15 +34,15 @@ void Merchant::applyEncounter(Player &player) const {
     int numChoice;
     printStartGameMessage();
     bool isValid = false;
-    printMerchantInitialMessageForInteractiveEncounter(cout ,player.getName(), player.get_money());
+    printMerchantInitialMessageForInteractiveEncounter(cout, player.getName(), player.get_money());
     while (!isValid) {
         cin >> strChoice;
         isValid = checkNumber(strChoice);
-        if (!isValid){
+        if (!isValid) {
             printInvalidInput();
         }
     }
-    if (isValid){
+    if (isValid) {
         numChoice = std::stoi(strChoice);
         int price;
         switch (numChoice) {
@@ -50,7 +50,7 @@ void Merchant::applyEncounter(Player &player) const {
                 price = BUY_NOTHING;
                 break;
             case BUY_HP:
-                if(player.pay(PRICE_HP)) {
+                if (player.pay(PRICE_HP)) {
                     player.heal(MERCHANT_HEAL);
                     price = PRICE_HP;
                 }
@@ -60,12 +60,13 @@ void Merchant::applyEncounter(Player &player) const {
                 }
                 break;
             case BUY_BUFF:
-                if (player.pay(PRICE_BUFF)){
+                if (player.pay(PRICE_BUFF)) {
                     player.buff(MERCHANT_BUFF);
                     price = PRICE_BUFF;
                 }
                 else {
                     printMerchantInsufficientCoins(cout);
+                    price = NOT_ENOUGH_MONEY;
                 }
                 break;
         }
