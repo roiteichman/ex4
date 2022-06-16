@@ -36,7 +36,8 @@ void Merchant::applyEncounter(Player &player) const {
     bool isValid = false;
     printMerchantInitialMessageForInteractiveEncounter(cout, player.getName(), player.get_money());
     while (!isValid) {
-        cin >> strChoice;
+        getline(cin, strChoice, '\n');
+        //cin >> strChoice;
         isValid = checkNumber(strChoice);
         if (!isValid) {
             printInvalidInput();
