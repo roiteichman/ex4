@@ -22,7 +22,7 @@ public:
     DeckFileFormatError(string& numOfLine) :
             m_numOfLine(numOfLine) {}
     const char *what() const noexcept override {
-        string s = "Deck File Error: File format error in line " + m_numOfLine + "\n";
+        string s = "Deck File Error: File format error in line " + m_numOfLine;
         return s.c_str();
     };
 };

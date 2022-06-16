@@ -1,22 +1,21 @@
 //
 // Created by teich on 09/06/2022.
 //
+#include "Players/Player.h"
+#include "Cards/Card.h"
 #include "Mtmchkin.h"
-#include "Queue.h"
-#include "Card.h"
-#include "Goblin.h"
-#include "Vampire.h"
-#include "Dragon.h"
-#include "Merchant.h"
-#include "Treasure.h"
-#include "Pitfall.h"
-#include "Barfight.h"
-#include "Fairy.h"
-#include "Player.h"
-#include "Wizard.h"
-#include "Rogue.h"
-#include "Fighter.h"
-#include "utilities.h"
+#include "Cards/Vampire.h"
+#include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
+#include "Cards/Fairy.h"
+#include "Cards/Goblin.h"
+#include "Cards/Merchant.h"
+#include "Cards/Pitfall.h"
+#include "Cards/Treasure.h"
+#include "Players/Rogue.h"
+#include "Players/Wizard.h"
+#include "Players/Fighter.h"
+#include "Exception.h"
 #include <fstream>
 using std::ifstream;
 using std::ofstream;
@@ -53,31 +52,38 @@ Player& intToPlayer(int i, string str, string type);
 bool checkNumber(string str);
 void printBack(Queue<Player*> queue, int& i);
 
-Mtmchkin::Mtmchkin(const std::string fileName) {
+Mtmchkin::Mtmchkin(const std::string fileName):
+m_roundCount(1)
+{
     ifstream source(fileName);
     string cardType;
-    if(!source.fail()){
-        cout<<"Error in opening file!"<<endl;
-        ///TO DO: throw Exception while error in name file or in opening
+    if(!source){
+        throw DeckFileNotFound();
+    }
+    if(source.peek()==std::ifstream::traits_type::eof()){
+        throw DeckFileInvalidSize();
     }
     string str_numOfCards;
+    int j=0;
     while(getline(source,cardType)){
-        for(int i=0; i<NUM_OF_CARDS; i++)
-            if(!CARDS_STR[i].compare(cardType))
+        j++;
+        std::string str = std::to_string(j);
+        for(int i=0; i<NUM_OF_CARDS; i++){
+            if(!CARDS_STR[i].compare(cardType)){
                 m_cardsQueue.pushBack(&intToCard(i));
+                break;
+            }
+            else if(i==NUM_OF_CARDS-1){
+                DeckFileFormatError(str).what();
+                throw DeckFileFormatError(str);
+            }
         }
-    //creates a cards queue
-
-
-    //string line;
-    /*for(int i=0; i<NUM_OF_CARDS; i++) {
-        m_cardsQueue.pushBack(&intToCard(i));
-    }*/
+    }
+    source.close();
 
     //gets the team size
 
     string str_numOfPlayers;
-    int numOfPlayers;
     printStartGameMessage();
     bool isValid;
     do {
@@ -85,18 +91,21 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
         cin >> str_numOfPlayers;
         isValid = checkNumber(str_numOfPlayers);
         if (isValid){
-            numOfPlayers = std::stoi(str_numOfPlayers);
+            m_numOfPlayers = std::stoi(str_numOfPlayers);
         }
-        if (numOfPlayers < MIN_PLAYERS || numOfPlayers > MAX_PLAYERS) {
+        if (m_numOfPlayers < MIN_PLAYERS || m_numOfPlayers > MAX_PLAYERS) {
             printInvalidTeamSize();
         }
-    } while (numOfPlayers < MIN_PLAYERS || numOfPlayers > MAX_PLAYERS || !isValid);
+    } while (m_numOfPlayers < MIN_PLAYERS || m_numOfPlayers > MAX_PLAYERS || !isValid);
 
     //check the validity of the name and the roll
     string name;
     string type;
-    for (int i = 0; i < numOfPlayers; ++i) {
-        printInsertPlayerMessage();
+    bool isValidPlayer = true;
+    for (int i = 0; i < m_numOfPlayers; ++i) {
+        if(isValidPlayer) {
+            printInsertPlayerMessage();
+        }
         {
             cin >> name;
             cin >> type;
@@ -107,10 +116,12 @@ Mtmchkin::Mtmchkin(const std::string fileName) {
                 for (int p = 0; p < NUM_OF_PLAYERS; ++p) {
                     if (!(PLAYERS_STR[p].compare(type))) {
                         m_playersQueue.pushBack(&(intToPlayer(p, name, type)));
+                        isValidPlayer = true;
                         break;
                     }
-                    if (p == NUM_OF_PLAYERS-1) {
+                    else if (p == NUM_OF_PLAYERS-1) {
                         i--;
+                        isValidPlayer = false;
                         printInvalidClass();
                     }
                 }
@@ -179,42 +190,41 @@ Card& intToCard(int i)
 
 void Mtmchkin::playRound()
 {
-    int activePlayers = m_playersQueue.size();
-    printRoundStartMessage(m_roundCount);
-    for(int j=0; j<activePlayers; j++)
-    {
-        printTurnStartMessage(m_playersQueue.front()->getName());
-        Card* currentCard = m_cardsQueue.front();
-        currentCard->applyEncounter(*m_playersQueue.front());
-        m_cardsQueue.popFront();
-        m_cardsQueue.pushBack(currentCard);
+    if(!isGameOver()) {
+        int activePlayers = m_playersQueue.size();
+        printRoundStartMessage(m_roundCount);
+        for (int j = 0; j < activePlayers; j++) {
+            printTurnStartMessage(m_playersQueue.front()->getName());
+            Card *currentCard = m_cardsQueue.front();
+            currentCard->applyEncounter(*m_playersQueue.front());
+            m_cardsQueue.popFront();
+            m_cardsQueue.pushBack(currentCard);
 
-        // checking if player win
-        if (m_playersQueue.front()->getLevel()==MAX_LEVEL)
-        {
-            m_winnersPlayers.pushBack(m_playersQueue.front());
-            m_playersQueue.popFront();
+            // checking if player win
+            if (m_playersQueue.front()->getLevel() == MAX_LEVEL) {
+                m_winnersPlayers.pushBack(m_playersQueue.front());
+                m_playersQueue.popFront();
+            }
+                // checking if player lost
+            else if (m_playersQueue.front()->isKnockedOut()) {
+                m_losersPlayers.pushBack(m_playersQueue.front());
+                m_playersQueue.popFront();
+            }
+                // else - the player continue to play
+            else {
+                m_playersQueue.pushBack(m_playersQueue.front());
+                m_playersQueue.popFront();
+            }
+            // checking if game over
+            if (isGameOver())
+                printGameEndMessage();
         }
-            // checking if player lost
-        else if (m_playersQueue.front()->isKnockedOut()) {
-            m_losersPlayers.pushBack(m_playersQueue.front());
-            m_playersQueue.popFront();
-        }
-            // else - the player continue to play
-        else {
-            m_playersQueue.pushBack(m_playersQueue.front());
-            m_playersQueue.popFront();
-        }
-        // checking if game over
-        if(!isGameOver())
-            printGameEndMessage();
+        m_roundCount++;
     }
-    printLeaderBoard();
-    m_roundCount++;
 }
 
 int Mtmchkin::getNumberOfRounds() const {
-    return m_roundCount;
+    return m_roundCount-1;
 }
 
 bool Mtmchkin::isGameOver() const {
