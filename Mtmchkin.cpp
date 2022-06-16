@@ -109,7 +109,7 @@ m_roundCount(1)
         }
         {
             getline(cin, name, ' ');
-            getline(cin, type);
+            getline(cin, type, '\n');
             //cin >> name;
             //cin >> type;
             if (name.length() >= MAX_CHARACTER) {
