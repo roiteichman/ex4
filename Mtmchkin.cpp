@@ -88,7 +88,8 @@ m_roundCount(1)
     bool isValid;
     do {
         printEnterTeamSizeMessage();
-        cin >> str_numOfPlayers;
+        getline(cin, str_numOfPlayers, '\n');
+        //cin >> str_numOfPlayers;
         isValid = checkNumber(str_numOfPlayers);
         if (isValid){
             m_numOfPlayers = std::stoi(str_numOfPlayers);
@@ -107,8 +108,10 @@ m_roundCount(1)
             printInsertPlayerMessage();
         }
         {
-            cin >> name;
-            cin >> type;
+            getline(cin, name, ' ');
+            getline(cin, type);
+            //cin >> name;
+            //cin >> type;
             if (name.length() >= MAX_CHARACTER) {
                 i--;
                 printInvalidName();
