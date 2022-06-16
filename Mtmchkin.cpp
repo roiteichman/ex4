@@ -265,7 +265,6 @@ Mtmchkin::~Mtmchkin() {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int i=1;
-    bool changeQueue = true;
     Queue<Player*> tmpQueue = m_winnersPlayers;
     for(int j = 0; j<NON_LOSERS_QUEUES; j++){
         while(!tmpQueue.isEmpty()){

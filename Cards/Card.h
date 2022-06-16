@@ -4,9 +4,9 @@
 #ifndef EX2_Card_H
 #define EX2_Card_H
 
-#include "utilities.h"
+#include "../utilities.h"
 #include <string>
-#include "Player.h"
+#include "../Players/Player.h"
 
 using std::ostream;
 using std::string;
