@@ -1,0 +1,3 @@
+C:/Users/teich/Documents/technion/semester 2/matam/exercises/ex4/ex4/cmake-build-debug/CMakeFiles/hw4.dir
+C:/Users/teich/Documents/technion/semester 2/matam/exercises/ex4/ex4/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/teich/Documents/technion/semester 2/matam/exercises/ex4/ex4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
