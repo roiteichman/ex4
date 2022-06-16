@@ -87,7 +87,7 @@ void Merchant::print(ostream &os) const
 
 bool checkNumber(string str)
 {
-    for (int i = 0; i < str.length(); i++)
+    for (unsigned int i = 0; i < str.length(); i++)
         if (isdigit(str[i]) == false)
             return false;
     return true;
